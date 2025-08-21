@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "fma"
+version = "0.1.0"
+description = "Easy-to-use SDK for deploying and interacting with FlyMy.AI’s high-performance generative infrastructure."
+authors = ["n-freman <nazar@flymy.ai>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+httpx = "^0.28.1"
+pillow = "^11.3.0"
+click = "^8.2.1"
+pyaml = "^25.7.0"
+pydantic = "^2.11.7"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+fma = "fma.cli.main:cli"
+
+[tool.setuptools.data-files]
+"share/man/man1" = ["docs/man/fma.1"]
