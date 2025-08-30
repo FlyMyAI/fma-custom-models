@@ -7,14 +7,16 @@ URLS = {"login": f"{BASE_URL}/auth/login/"}
 
 MODEL_TEMPLATE = """from typing import List
 
+from pydantic import BaseModel
+
 from fma.toolkit import model as fma_model
 
 
-class Input:
+class Input(BaseModel):
     pass
 
 
-class Output:
+class Output(BaseModel):
     pass
 
 

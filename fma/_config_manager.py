@@ -22,7 +22,7 @@ class ConfigManager(metaclass=SingletonMeta):
         self._dump_config()
 
     def get(self, key, default=None):
-        return self.__config.get(key, default) 
+        return self.__config.get(key, default)
 
     def set(self, key, value):
         self.__config[key] = value

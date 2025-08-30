@@ -10,11 +10,11 @@ from fma._constants import MODEL_TEMPLATE
 @click.argument("model_name")
 def init(model_name):
     """Command for model project intialization.
-    
-Expected folder structure:
-<model_name>/
-    | model.py
-metadata.yaml"""
+
+    Expected folder structure:
+    <model_name>/
+        | model.py
+    metadata.yaml"""
     print(f"{model_name =}")
     _validated_model_name(model_name)
     os.mkdir(model_name)
