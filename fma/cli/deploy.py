@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import os
 from pprint import pprint
 
@@ -27,4 +28,4 @@ def deploy():
 
     model_class = module.Model
     print("Import successfull!!!\n")
-    pprint(model_class._serialize())
+    print(json.dumps(model_class._serialize(model_name), indent=4))
