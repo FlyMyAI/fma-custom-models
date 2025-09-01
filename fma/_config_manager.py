@@ -29,8 +29,11 @@ class ConfigManager(metaclass=SingletonMeta):
         self._dump_config()
 
     def remove(self, key):
-        del self.__config[key]
-        self._dump_config()
+        try:
+            del self.__config[key]
+            self._dump_config()
+        except KeyError:
+            pass
 
     def _load_config(self):
         if not os.path.exists(CONFIG_PATH):

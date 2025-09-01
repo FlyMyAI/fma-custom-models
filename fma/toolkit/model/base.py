@@ -15,7 +15,7 @@ class FMABaseModel:
                 "FMA models must implement both " "`initialize` and `predict` methods"
             )
 
-        representation = {"model_name": model_name ,"requirements": requirements}
+        representation = {"model_name": model_name, "requirements": requirements}
         representation["initialize_method"] = _serialize_initialize_method(
             initialize_method
         )
