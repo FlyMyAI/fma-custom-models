@@ -27,6 +27,6 @@ class Model(fma_model.Model):
         pass
 
     def predict(self, input: Input) -> Output:
-        return Output()
+        return {}
 
 """
