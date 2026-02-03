@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import logging
 import os
 from pprint import pprint
 
@@ -25,6 +26,7 @@ def deploy():
         "Authorization": f"Bearer {config_manager.get('auth_token')}",
         "Content-Type": "application/json",
     }
+    logging.info(f"{model_payload = }")
     with httpx_error_handling():
         response = httpx.post(URLS["deploy"], json=model_payload, headers=headers)
         response.raise_for_status()
