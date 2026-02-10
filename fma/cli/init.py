@@ -16,7 +16,7 @@ def init(model_name):
         | model.py
     metadata.yaml"""
     print(f"{model_name =}")
-    _validated_model_name(model_name)
+    _validate_model_name(model_name)
     os.mkdir(model_name)
 
     model_file_path = f"{model_name}/model.py"
@@ -27,5 +27,6 @@ def init(model_name):
     open("metadata.yaml", "w").close()
 
 
-def _validated_model_name(model_name: str):
+def _validate_model_name(model_name: str):
+    """Validates if model_name can be used in flymy.ai platform."""
     pass

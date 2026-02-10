@@ -1,17 +1,20 @@
 import importlib.util
-import json
 import logging
 import os
-from pprint import pprint
 
+import click
 import httpx
+from pyaml import yaml
 
 from fma.auth import check_authorization
 from fma._config_manager import config_manager
 from fma._constants import URLS
+from fma._dto import DeployedModelData
 from fma._messages import DEPLOY_ERROR_MESSAGE
 from fma._utils import httpx_error_handling
 from .main import cli
+
+logger = logging.getLogger(__name__)
 
 
 @cli.command()
@@ -21,7 +24,7 @@ def deploy():
     check_authorization()
     module, model_name = _import_module()
     model_class = module.Model
-    model_payload = model_class._serialize(model_name)
+    model_payload = model_class.serialize(model_name)
     headers = {
         "Authorization": f"Bearer {config_manager.get('auth_token')}",
         "Content-Type": "application/json",
@@ -29,9 +32,22 @@ def deploy():
     logging.info(f"{model_payload = }")
     with httpx_error_handling():
         response = httpx.post(URLS["deploy"], json=model_payload, headers=headers)
-        response.raise_for_status()
-        response_data = response.json()
-    print(f"Successfully deployed model {model_name}! ✅")
+        try:
+            response.raise_for_status()
+        except httpx.HTTPStatusError:
+            if str(response.status_code).startswith("4"):
+                click.echo(response.json()[0]["detail"])
+                click.echo("Try running `fma update`")
+            raise
+        model_data = DeployedModelData(**response.json())
+
+    with open("metadata.yaml", "w+") as file:
+        yaml.dump(model_data.model_dump(), file)
+
+    click.echo(
+        f"Successfully deployed model {model_name}! ✅\n"
+        "Model data was saved in metadata.yaml file"
+    )
 
 
 def _import_module():

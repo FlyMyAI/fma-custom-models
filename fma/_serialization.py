@@ -1,7 +1,7 @@
 import inspect
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Self, Tuple, Type, Union
+from typing import Any, Callable, Dict, Tuple
 
 from pydantic import BaseModel
 
@@ -11,11 +11,11 @@ from fma.toolkit.fields.file import File
 T = Dict[str, Any]
 
 
-def _serialize_initialize_method(method: Callable[[Any], Any]) -> str:
+def serialize_initialize_method(method: Callable[[Any], Any]) -> str:
     return _get_method_body(method)
 
 
-def _serialize_predict_method(
+def serialize_predict_method(
     method: Callable[[Any, BaseModel], BaseModel],
 ) -> Tuple[str, T, T]:
     method_body = _get_method_body(method)
@@ -32,23 +32,11 @@ def _serialize_predict_method(
 
 
 def _parse_io_models(io_class: BaseModel) -> Dict[str, Any]:
-    io_fields_raw = io_class.model_json_schema().get("properties", [])
     io_fields = []
     for field_name, field_info in io_class.model_fields.items():
         field = {"title": field_name}
         field["type"], field["optional"] = _get_field_type_data(field_info.annotation)
         io_fields.append(field)
-    # for io_field_name, io_field_details in io_fields_raw.items():
-    #     field = {"title": io_field_name}
-    #     if type_ := io_field_details.get("type"):
-    #         field["type"] = type_
-    #     elif types := io_field_details.get("anyOf"):
-    #         for type_dict in types:
-    #             if type_ := type_dict.get("type"):
-    #                 field["type"] = type_
-    #                 break
-    #         field["optional"] = True
-    #     io_fields.append(field)
     return {"fields": io_fields}
 
 

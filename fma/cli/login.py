@@ -13,7 +13,7 @@ from .main import cli
 @click.option("--username", help="Optional username")
 @click.option("--password", help="Optional password")
 def login(username, password):
-    """Login command"""
+    """Login command."""
     if username is None:
         username = input("Username: ")
     if password is None:

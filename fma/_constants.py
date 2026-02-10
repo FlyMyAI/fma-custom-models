@@ -3,7 +3,12 @@ import os
 CONFIG_DIR = f"{os.getenv('HOME')}/.config/fma"
 CONFIG_PATH = f"{CONFIG_DIR}/config.yaml"
 BASE_URL = os.getenv("FMA_BACKEND", "https://backend.flymy.ai/api/v1")
-URLS = {"login": f"{BASE_URL}/auth/login/", "deploy": f"{BASE_URL}/deploy/"}
+URLS = {
+    "login": f"{BASE_URL}/auth/login/",
+    "deploy": f"{BASE_URL}/custom-models/",
+    "delete": f"{BASE_URL}/custom-models/%s/",
+    "logs": f"{BASE_URL}/custom-models/%s/logs/",
+}
 
 MODEL_TEMPLATE = """from typing import List
 
