@@ -67,6 +67,8 @@ After this the data about your model will be written into `metadata.yaml` file.
 
 ### Additional fields
 
+Currenly standard python `str, int, bool, float` are available.   
+The also can be used in combination with `typing.Optional`   
 You can specify image or file fields in the io classes by:
 
 ```
@@ -80,3 +82,17 @@ from fma.toolkit.fields.file import File
 ```
 
 *Note* that `File` is currently supported **only** as the output
+
+
+### Deleting deployed model
+
+You can delete the deployed model if you don't need it anymore:
+`fma delete`
+
+### Updating the model
+
+`fma update` will delete the model and redeploy it under the same name if available.
+
+### Fetching startup logs
+
+`fma logs --output-file logs.tx` will download logs into specified file or display them in stdout otherwise.
