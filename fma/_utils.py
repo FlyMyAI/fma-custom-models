@@ -23,7 +23,7 @@ def httpx_error_handling():
         elif status == 400:
             print("ERROR: Some of the provided arguments were incorrect!")
         elif status == 404:
-            print("ERROR: Logs are not available")
+            print("ERROR: Unavailable")
         else:
             print("ERROR: We encountered an HTTP error: ", errh)
         exit(1)

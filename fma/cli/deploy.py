@@ -36,7 +36,7 @@ def deploy():
             response.raise_for_status()
         except httpx.HTTPStatusError:
             if str(response.status_code).startswith("4"):
-                click.echo(response.json()[0]["detail"])
+                click.echo(response.json())
                 click.echo("Try running `fma update`")
             raise
         model_data = DeployedModelData(**response.json())
