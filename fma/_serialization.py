@@ -5,6 +5,7 @@ from typing import Any, Callable, Dict, Tuple
 
 from pydantic import BaseModel
 
+from fma.toolkit.fields.audio import Audio
 from fma.toolkit.fields.image import Image
 from fma.toolkit.fields.file import File
 
@@ -60,6 +61,8 @@ def _get_field_type_data(annotation) -> Tuple[str, bool]:
         type_string = "image"
     elif type_ is File:
         type_string = "file"
+    elif type_ is Audio:
+        type_string = "audio"
     else:
         raise ValueError(f"Type {type_} is not supported")
     return type_string, optional

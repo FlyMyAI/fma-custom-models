@@ -57,3 +57,8 @@ def load_model_data() -> DeployedModelData:
         logger.exception(f"{format_exc()}")
         exit(1)
     return model_data
+
+
+def dump_model_data(data):
+    with open("metadata.yaml", "w+") as file:
+        yaml.safe_dump(data, file)

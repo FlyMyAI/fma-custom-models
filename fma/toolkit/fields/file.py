@@ -8,12 +8,6 @@ from .base import FMABaseField
 
 class File(FMABaseField):
     @classmethod
-    def __get_pydantic_core_schema__(
-        cls, _source: Any, _handler: Any
-    ) -> core_schema.CoreSchema:
-        return core_schema.str_schema()
-
-    @classmethod
     def __get_pydantic_json_schema__(
         cls, _core_schema: core_schema.CoreSchema, _handler: Any
     ) -> JsonSchemaValue:

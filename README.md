@@ -69,15 +69,11 @@ After this the data about your model will be written into `metadata.yaml` file.
 
 Currenly standard python `str, int, bool, float` are available.   
 The also can be used in combination with `typing.Optional`   
-You can specify image or file fields in the io classes by:
+You can specify audio, image and file fields in the io classes by:
 
 ```
+from fma.toolkit.fields.audio import Audio
 from fma.toolkit.fields.image import Image
-```
-
-or
-
-```
 from fma.toolkit.fields.file import File
 ```
 
