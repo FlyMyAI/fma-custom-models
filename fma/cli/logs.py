@@ -8,7 +8,7 @@ from fma.auth import check_authorization
 from fma._config_manager import config_manager
 from fma._constants import URLS
 from fma._dto import HardwareLogs
-from fma._utils import httpx_error_handling, load_model_data
+from fma._utils import httpx_error_handling, load_model_data, dump_model_data
 from .main import cli
 
 logger = logging.getLogger(__name__)
@@ -33,10 +33,18 @@ def logs(output_file: str | None = None):
         response = httpx.get(logs_data.link)
         response.raise_for_status()
     except httpx.HTTPStatusError:
-        click.echo(
-            "Logs are not available. This could happen because project started succesfully."
-        )
-        exit()
+        if model_data.logs_link is None:
+            click.echo(
+                "Logs are not available. This could happen because project started succesfully."
+            )
+            exit()
+        else:
+            # Use old link for logs
+            response = httpx.get(model_data.logs_link)
+    else:
+        # Save logs link if link is valid
+        model_data.logs_link = logs_data.link
+        dump_model_data(model_data.model_dump())
 
     logs_text = response.text
     if output_file is not None:

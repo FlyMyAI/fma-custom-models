@@ -1,5 +1,5 @@
 from .base import FMABaseField
 
 
-class URL(FMABaseField):
+class FileURL(FMABaseField):
     pass
