@@ -65,6 +65,28 @@ After this the data about your model will be written into `metadata.yaml` file.
 
 ## Extra info
 
+### Input fields default values
+
+Fields in input object also support default value declaration.
+Example of `Input` class that uses default values:
+```
+class Input(BaseModel):
+    text: str = Field(default="Hello")
+    number: int = Field(default=1)
+    fraction: float
+    flag: bool = Field(default=True)
+    image: Image
+    file: File
+    audio: Audio
+    otext: Optional[str]
+    onumber: Optional[int] = Field(default=1)
+    ofraction: Optional[float] = Field(default=0.2)
+    oflag: Optional[bool] = Field(default=False)
+    oimage: Optional[Image]
+    ofile: Optional[File]
+    oaudio: Optional[Audio]
+```
+
 ### Additional fields
 
 Currenly standard python `str, int, bool, float` are available.   
