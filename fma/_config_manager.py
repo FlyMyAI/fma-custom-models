@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Self
+from typing import Optional
 
 import yaml
 from yaml.loader import Loader
@@ -11,7 +11,7 @@ from fma._utils import SingletonMeta
 class ConfigManager(metaclass=SingletonMeta):
     __config: dict
     __config_path: str
-    __instance: Optional[Self] = None
+    __instance = None
 
     def __init__(self):
         os.makedirs(CONFIG_DIR, exist_ok=True)
