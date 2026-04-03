@@ -13,6 +13,7 @@ pillow = "^11.3.0"
 click = "^8.2.1"
 pyaml = "^25.7.0"
 pydantic = "^2.11.7"
+flymyai = ">=1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
