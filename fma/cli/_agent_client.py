@@ -22,6 +22,6 @@ def get_agent_client():
     base_url = (
         os.environ.get("FLYMYAI_DSN")
         or config_manager.get("agent_base_url")
-        or "https://api.flymy.ai"
+        or "https://backend.flymy.ai"
     )
     return AgentClient(api_key=api_key, base_url=base_url)
